@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "5401862140",
+    "firebase_url": "https://iotecapp.firebaseio.com",
+    "project_id": "iotecapp",
+    "storage_bucket": "iotecapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5401862140:android:ee58b3029fb134c0",
+        "android_client_info": {
+          "package_name": "brandon.example.com.iotecapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5401862140-471r4hcc7a2l2ju2f3hvgut37hu5qn6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2iehpfcLT2jL67t9gH9mmY-POaJoUuq8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
