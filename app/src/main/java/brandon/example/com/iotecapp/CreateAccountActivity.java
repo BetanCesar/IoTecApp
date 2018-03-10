@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -52,8 +54,8 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 String newemail = email.getText().toString().trim();
                 String newpass = contraseña.getText().toString().trim();
-                String newname = nombre.getText().toString().trim();
-                String newmatricula = matricula.getText().toString().trim();
+                final String newname = nombre.getText().toString().trim();
+                final String newmatricula = matricula.getText().toString().trim();
 
                 if(TextUtils.isEmpty(newname)){
                     nombre.setError("Ingresa tu nombre");
@@ -89,6 +91,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 if(!task.isSuccessful()){
                                     Toast.makeText(CreateAccountActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                                 }else{
+                                    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+                                    DatabaseReference currentUserDB = mDatabase.child(auth.getCurrentUser().getUid());
+                                    currentUserDB.child("nombre").setValue(newname);
+                                    currentUserDB.child("matricula").setValue(newmatricula);
                                     Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
