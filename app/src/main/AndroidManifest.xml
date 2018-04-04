@@ -21,7 +21,8 @@
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".PedirMaterialesActivity"></activity>
+        <activity android:name=".PedirMaterialesActivity" />
+        <activity android:name=".PerfilActivity"></activity>
     </application>
 
 </manifest>

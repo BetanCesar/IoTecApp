@@ -52,7 +52,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String newemail = email.getText().toString().trim();
+                final String newemail = email.getText().toString().trim();
                 String newpass = contraseña.getText().toString().trim();
                 final String newname = nombre.getText().toString().trim();
                 final String newmatricula = matricula.getText().toString().trim();
@@ -95,6 +95,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     DatabaseReference currentUserDB = mDatabase.child(auth.getCurrentUser().getUid());
                                     currentUserDB.child("nombre").setValue(newname);
                                     currentUserDB.child("matricula").setValue(newmatricula);
+                                    currentUserDB.child("correo").setValue(newemail);
                                     Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
