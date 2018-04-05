@@ -22,7 +22,11 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".PedirMaterialesActivity" />
-        <activity android:name=".PerfilActivity"></activity>
+        <activity android:name=".PerfilActivity" />
+        <activity
+            android:name=".AcercaDeActivity"
+            android:label="@string/title_activity_acerca_de"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
