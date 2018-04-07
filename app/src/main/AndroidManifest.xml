@@ -26,7 +26,8 @@
         <activity
             android:name=".AcercaDeActivity"
             android:label="@string/title_activity_acerca_de"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DispositivosActivity"></activity>
     </application>
 
 </manifest>

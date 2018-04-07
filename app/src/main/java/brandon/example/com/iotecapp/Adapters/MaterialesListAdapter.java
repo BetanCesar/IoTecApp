@@ -1,6 +1,7 @@
 package brandon.example.com.iotecapp.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import brandon.example.com.iotecapp.DispositivosActivity;
 import brandon.example.com.iotecapp.R;
 import brandon.example.com.iotecapp.pojo.Material;
 
@@ -45,6 +47,9 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "Material ID: " + material_id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context,DispositivosActivity.class);
+                intent.putExtra("id", material_id);
+                context.startActivity(intent);
             }
         });
     }
