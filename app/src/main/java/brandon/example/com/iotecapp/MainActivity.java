@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
-    private ImageView perfil, facebook, acercade;
+    private ImageView perfil, facebook, acercade, materiales;
 
 
     @Override
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         perfil = (ImageView) findViewById(R.id.perfil);
         facebook = (ImageView) findViewById(R.id.facebookbutton);
         acercade = (ImageView) findViewById(R.id.acercade);
+        materiales = (ImageView) findViewById(R.id.pedir);
 
 
 
@@ -57,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,AcercaDeActivity.class);
+                startActivity(intent);
+            }
+        });
+        materiales.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,PedirMaterialesActivity.class);
                 startActivity(intent);
             }
         });
