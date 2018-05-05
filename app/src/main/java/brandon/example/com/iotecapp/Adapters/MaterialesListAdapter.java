@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import brandon.example.com.iotecapp.DispositivosActivity;
 import brandon.example.com.iotecapp.R;
@@ -28,16 +40,22 @@ import brandon.example.com.iotecapp.pojo.Material;
 
 public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAdapter.ViewHolder> {
 
+    private static final String TAG = "Firelog";
     public List<Material> materialsList;
     public Context context;
     public FirebaseStorage storage;
     public StorageReference storageRef;
+
+    //private FirebaseFirestore mFirestore;
+    //public DocumentReference docRef;
 
     public MaterialesListAdapter(Context context, List<Material> materialsList){
         this.materialsList = materialsList;
         this.context = context;
 
         storage = FirebaseStorage.getInstance();
+
+        //mFirestore = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -67,6 +85,34 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "Material ID: " + material_id, Toast.LENGTH_SHORT).show();
+                /*
+                long number = 0l;
+                Random rand = new Random();
+                number = (rand.nextInt(1000000)+1000000000l) * (rand.nextInt(900)+100);
+
+
+
+                Map<String, Object> dispositivo = new HashMap<>();
+                dispositivo.put("numero", number+"");
+                dispositivo.put("prestado", false);
+                docRef = mFirestore.collection("materiales").document(material_id);
+                docRef.collection("dispositivos").document()
+                        .set(dispositivo)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully written!");
+
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error writing document", e);
+                            }
+                        });
+                */
                 Intent intent = new Intent(context,DispositivosActivity.class);
                 intent.putExtra("id", material_id);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
