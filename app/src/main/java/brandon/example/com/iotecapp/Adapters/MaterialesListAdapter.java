@@ -49,6 +49,7 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
                 Toast.makeText(context, "Material ID: " + material_id, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context,DispositivosActivity.class);
                 intent.putExtra("id", material_id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
