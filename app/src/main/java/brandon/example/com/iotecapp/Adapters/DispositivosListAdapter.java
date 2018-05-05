@@ -1,12 +1,19 @@
 package brandon.example.com.iotecapp.Adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -22,10 +29,14 @@ public class DispositivosListAdapter extends RecyclerView.Adapter<DispositivosLi
 
     public List<Dispositivo> dispositivosList;
     public Context context;
+    public FirebaseStorage storage;
+    public StorageReference storageRef;
 
     public DispositivosListAdapter(Context context, List<Dispositivo> dispositivosList){
         this.dispositivosList = dispositivosList;
         this.context = context;
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReferenceFromUrl("gs://iotecapp.appspot.com/Materiales").child("Dualshock4.png");
     }
 
     @Override
@@ -35,7 +46,14 @@ public class DispositivosListAdapter extends RecyclerView.Adapter<DispositivosLi
     }
 
     @Override
-    public void onBindViewHolder(DispositivosListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final DispositivosListAdapter.ViewHolder holder, int position) {
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            }
+        });
         holder.numeroText.setText(dispositivosList.get(position).getNumero());
         if(dispositivosList.get(position).isPrestado()){
             holder.prestadoText.setText("En préstamo");
@@ -64,6 +82,7 @@ public class DispositivosListAdapter extends RecyclerView.Adapter<DispositivosLi
         View mView;
 
         public TextView numeroText, prestadoText;
+        public ImageView materialImage1;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +90,7 @@ public class DispositivosListAdapter extends RecyclerView.Adapter<DispositivosLi
 
             numeroText = (TextView) mView.findViewById(R.id.numero_text);
             prestadoText = (TextView) mView.findViewById(R.id.prestado_text);
+            materialImage1 = (ImageView) mView.findViewById(R.id.materialImageDetail);
         }
     }
 

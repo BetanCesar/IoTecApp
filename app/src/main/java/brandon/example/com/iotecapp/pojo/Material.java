@@ -5,15 +5,17 @@ package brandon.example.com.iotecapp.pojo;
  */
 
 public class Material extends MaterialId{
-    String nombre, cantidad, disponible;
+    String nombre, cantidad, disponible, image;
 
     public Material() {
     }
 
-    public Material(String nombre, String cantidad, String disponible) {
+    public Material(String nombre, String cantidad, String disponible, String image) {
         this.nombre = nombre;
         this.cantidad = cantidad;
+
         this.disponible = disponible;
+        this.image = image;
     }
 
     public String getNombre() {
@@ -38,5 +40,13 @@ public class Material extends MaterialId{
 
     public void setDisponible(String disponible) {
         this.disponible = disponible;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

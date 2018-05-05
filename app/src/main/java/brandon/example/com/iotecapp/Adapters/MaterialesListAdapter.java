@@ -2,12 +2,19 @@ package brandon.example.com.iotecapp.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -23,10 +30,14 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
 
     public List<Material> materialsList;
     public Context context;
+    public FirebaseStorage storage;
+    public StorageReference storageRef;
 
     public MaterialesListAdapter(Context context, List<Material> materialsList){
         this.materialsList = materialsList;
         this.context = context;
+
+        storage = FirebaseStorage.getInstance();
     }
 
     @Override
@@ -36,7 +47,16 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        storageRef = storage.getReferenceFromUrl("gs://iotecapp.appspot.com/Materiales").child(materialsList.get(position).getImage());
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                holder.materialImage.setImageBitmap(bitmap);
+            }
+        });
         holder.nombreText.setText(materialsList.get(position).getNombre());
         holder.cantidadText.setText("Cantidad: " + materialsList.get(position).getCantidad());
         holder.disponibleText.setText("Disponibles: " + materialsList.get(position).getDisponible());
@@ -65,6 +85,7 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
         View mView;
 
         public TextView nombreText, cantidadText, disponibleText;
+        public ImageView materialImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +94,7 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
             nombreText = (TextView) mView.findViewById(R.id.nombre_text);
             cantidadText = (TextView) mView.findViewById(R.id.cantidad_text);
             disponibleText = (TextView) mView.findViewById(R.id.disponible_text);
+            materialImage = (ImageView) mView.findViewById(R.id.materialImagePrimary);
         }
     }
 

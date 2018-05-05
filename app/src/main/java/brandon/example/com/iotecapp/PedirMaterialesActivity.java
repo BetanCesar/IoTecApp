@@ -48,7 +48,7 @@ public class PedirMaterialesActivity extends AppCompatActivity {
 
         mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("materiales").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        mFirestore.collection("materiales").orderBy("nombre").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if(e != null){

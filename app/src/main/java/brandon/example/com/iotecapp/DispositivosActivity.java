@@ -2,14 +2,18 @@ package brandon.example.com.iotecapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
@@ -18,6 +22,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Text;
 
@@ -36,6 +42,9 @@ public class DispositivosActivity extends Activity {
     private DispositivosListAdapter dispositivosListAdapter;
     private List<Dispositivo> dispositivoList;
     private TextView nombreMaterialText;
+    private ImageView materialImageDetail;
+    public FirebaseStorage mStorage;
+    public StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,7 @@ public class DispositivosActivity extends Activity {
         setContentView(R.layout.activity_dispositivos);
 
         nombreMaterialText = (TextView) findViewById(R.id.nombre_material);
+        materialImageDetail = (ImageView) findViewById(R.id.materialImageDetail);
 
         Intent intent = getIntent();
         final String material_selected = intent.getExtras().getString("id");
@@ -56,6 +66,7 @@ public class DispositivosActivity extends Activity {
         mDispositivoList.setAdapter(dispositivosListAdapter);
 
         mFirestore = FirebaseFirestore.getInstance();
+        mStorage = FirebaseStorage.getInstance();
 
         DocumentReference docRef = mFirestore.collection("materiales").document(material_selected);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -66,6 +77,15 @@ public class DispositivosActivity extends Activity {
                     if (document != null) {
                         Material material = task.getResult().toObject(Material.class).withId(material_selected);
                         nombreMaterialText.setText(material.getNombre());
+                        mStorageRef = mStorage.getReferenceFromUrl("gs://iotecapp.appspot.com/Materiales").child(material.getImage());
+                        final long ONE_MEGABYTE = 1024 * 1024;
+                        mStorageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                materialImageDetail.setImageBitmap(bitmap);
+                            }
+                        });
                         Log.d(TAG, "DocumentSnapshot data: " + task.getResult().getData());
                     } else {
                         Log.d(TAG, "No such document");
