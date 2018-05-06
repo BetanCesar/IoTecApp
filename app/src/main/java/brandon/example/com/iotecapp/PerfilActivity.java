@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -16,14 +18,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import brandon.example.com.iotecapp.pojo.Prestamo;
 
 public class PerfilActivity extends AppCompatActivity {
+
+    private static final String TAG = "Firelog";
 
     private TextView nombre, prestados, correo, matricula;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseAuth auth;
     private DatabaseReference mRef;
     private Button logout;
+
+    // Firestore
+    private FirebaseFirestore mFirestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +47,9 @@ public class PerfilActivity extends AppCompatActivity {
         correo = (TextView) findViewById(R.id.correo);
         matricula = (TextView) findViewById(R.id.matricula);
         logout = (Button) findViewById(R.id.logoutnew);
+
+        // Firestore
+        mFirestore = FirebaseFirestore.getInstance();
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +94,26 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
+
+        // Update articulos prestados
+        mFirestore.collection("prestamos")
+                .whereEqualTo("uuid", uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int count = 0;
+                            for (DocumentSnapshot doc : task.getResult()) {
+                                count++;
+                            }
+                            prestados.setText(count+"");
+                            Log.d(TAG, "Total: " +count);
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
 
     }
