@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,9 +34,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import brandon.example.com.iotecapp.LoginActivity;
+import brandon.example.com.iotecapp.MainActivity;
 import brandon.example.com.iotecapp.R;
 import brandon.example.com.iotecapp.pojo.Material;
 import brandon.example.com.iotecapp.pojo.Prestamo;
@@ -59,7 +64,10 @@ public class PrestamosListAdapter extends RecyclerView.Adapter<PrestamosListAdap
     public StorageReference storageRef;
 
     // Material
-   private String nombreMaterial;
+    private String nombreMaterial;
+    private String materialId;
+    private String deviceId;
+    private String prestamoId;
 
     public PrestamosListAdapter(final Context context, List<Prestamo> prestamosList){
         this.prestamosList = prestamosList;
@@ -115,6 +123,9 @@ public class PrestamosListAdapter extends RecyclerView.Adapter<PrestamosListAdap
                 */
         final String muid = prestamosList.get(position).getMuid();
         final String duid = prestamosList.get(position).getDuid();
+        prestamoId = prestamosList.get(position).materialId;
+        materialId = muid;
+        deviceId = duid;
         DocumentReference docRef = mFirestore.collection("materiales").document(muid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -138,7 +149,14 @@ public class PrestamosListAdapter extends RecyclerView.Adapter<PrestamosListAdap
 
         //Log.d(TAG, "AHHHH: " + nombreMaterial);
         //holder.materialNameText.setText(nombreMaterial);
-        Log.d(TAG, "Adapter: " + prestamosList.get(position).getDuid());
+
+        holder.devolverDispositivoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnDevice(holder);
+            }
+        });
+        //Log.d(TAG, "Adapter: " + prestamosList.get(position).getDuid());
     }
 
     public void success(final ViewHolder holder, String name, String image){
@@ -155,6 +173,84 @@ public class PrestamosListAdapter extends RecyclerView.Adapter<PrestamosListAdap
     }
     public void successImage(ViewHolder holder, Bitmap bitmap){
         holder.materialPrestamoImage.setImageBitmap(bitmap);
+    }
+
+    public void returnDevice(ViewHolder holder){
+        // Update device
+        docRef = mFirestore.collection("materiales").document(materialId);
+        docRef.collection("dispositivos").document(deviceId)
+                .update("prestado", false)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+
+                        // Update Material disponibles
+                        docRef.collection("dispositivos")
+                                .whereEqualTo("prestado", false)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            int count = 0;
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                count++;
+                                            }
+                                            DocumentReference todasRef = mFirestore.collection("materiales").document(materialId);
+                                            todasRef.update("disponible", count+"")
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            Log.d(TAG, "Material updated successfully");
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.w(TAG, "Error updating material", e);
+                                                        }
+                                                    });
+                                            Log.d(TAG, "Total: "+ count);
+                                        } else {
+                                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                        }
+                                    }
+                                });
+
+                        // Delete prestamo collection
+                        mFirestore.collection("prestamos").document(prestamoId)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                Toast.makeText(context, "Artículo devuelto", Toast.LENGTH_LONG).show();
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        Intent intent = new Intent(context, MainActivity.class);
+                                        context.startActivity(intent);
+                                    }
+                                }, 1000);
+                            }
+                        })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(TAG, "Error deleting document", e);
+                                    }
+                                });
+
+
+                    } // End success
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
     }
 
     @Override
