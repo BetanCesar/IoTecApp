@@ -195,9 +195,10 @@ public class DispositivosListAdapter extends RecyclerView.Adapter<DispositivosLi
 
                             // Update prestamo collection
                             Map<String, Object> data = new HashMap<>();
-                            data.put("name", userName);
+                            data.put("nombre", userName);
                             data.put("matricula", userMatricula);
                             data.put("uuid", uid);
+                            data.put("muid", materialSelected);
                             data.put("duid", dispositivo_id);
 
                             mFirestore.collection("prestamos")

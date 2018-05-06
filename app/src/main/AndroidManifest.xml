@@ -27,7 +27,8 @@
             android:name=".AcercaDeActivity"
             android:label="@string/title_activity_acerca_de"
             android:theme="@style/AppTheme" />
-        <activity android:name=".DispositivosActivity"></activity>
+        <activity android:name=".DispositivosActivity" />
+        <activity android:name=".MisPrestamosActivity"></activity>
     </application>
 
 </manifest>
