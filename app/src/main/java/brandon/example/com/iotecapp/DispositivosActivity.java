@@ -43,6 +43,7 @@ public class DispositivosActivity extends Activity {
     private List<Dispositivo> dispositivoList;
     private TextView nombreMaterialText;
     private ImageView materialImageDetail;
+
     public FirebaseStorage mStorage;
     public StorageReference mStorageRef;
 
@@ -58,7 +59,7 @@ public class DispositivosActivity extends Activity {
         final String material_selected = intent.getExtras().getString("id");
 
         dispositivoList = new ArrayList<>();
-        dispositivosListAdapter = new DispositivosListAdapter(getApplicationContext(), dispositivoList);
+        dispositivosListAdapter = new DispositivosListAdapter(getApplicationContext(), dispositivoList, material_selected);
 
         mDispositivoList = (RecyclerView) findViewById(R.id.dispositivos_list);
         mDispositivoList.setHasFixedSize(true);
