@@ -76,15 +76,15 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
             }
         });
         holder.nombreText.setText(materialsList.get(position).getNombre());
-        holder.cantidadText.setText("Cantidad: " + materialsList.get(position).getCantidad());
-        holder.disponibleText.setText("Disponibles: " + materialsList.get(position).getDisponible());
+        holder.cantidadText.append(": " + materialsList.get(position).getCantidad());
+        holder.disponibleText.append(": " + materialsList.get(position).getDisponible());
 
         final String material_id = materialsList.get(position).materialId;
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Material ID: " + material_id, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Material ID: " + material_id, Toast.LENGTH_SHORT).show();
                 /*
                 long number = 0l;
                 Random rand = new Random();

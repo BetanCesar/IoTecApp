@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
         android:fontFamily="serif-monospace"
-        android:text="Mis Préstamos"
+        android:text="@string/mis_prestamos"
         android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="bold" />

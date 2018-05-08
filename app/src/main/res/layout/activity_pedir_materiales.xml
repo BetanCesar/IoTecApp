@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
         android:fontFamily="serif-monospace"
-        android:text="Pedir Materiales"
+        android:text="@string/pedir_materiales"
         android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="bold" />

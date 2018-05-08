@@ -49,9 +49,6 @@ public class AcercaDeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acerca_de);
 
-        circulo1 = (ImageView)findViewById(R.id.circulo1);
-        circulo2 = (ImageView)findViewById(R.id.circulo2);
-        circulo3 = (ImageView)findViewById(R.id.circulo3);
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -116,31 +113,14 @@ public class AcercaDeActivity extends AppCompatActivity {
                 case 0:
                     ImagenUno uno = new ImagenUno();
 
-                    circulo1.setImageDrawable(getDrawable(R.drawable.circulolleno));
-                    circulo2.setImageDrawable(getDrawable(R.drawable.ic_brightness_1_black_24dp));
-                    circulo3.setImageDrawable(getDrawable(R.drawable.ic_brightness_1_black_24dp));
-                    //circulo2.setImageResource(R.drawable.ic_brightness_1_black_24dp);
-                    //circulo3.setImageResource(R.drawable.ic_brightness_1_black_24dp);
                     return uno;
                 case 1:
                     ImagenDos dos = new ImagenDos();
-                    circulo2.setImageDrawable(getDrawable(R.drawable.circulolleno));
-                    circulo1.setImageDrawable(getDrawable(R.drawable.ic_brightness_1_black_24dp));
-                    circulo3.setImageDrawable(getDrawable(R.drawable.ic_brightness_1_black_24dp));
 
-                   // circulo2.setImageResource(R.drawable.circulolleno);
-                    //circulo1.setImageResource(R.drawable.ic_brightness_1_black_24dp);
-                    //circulo3.setImageResource(R.drawable.ic_brightness_1_black_24dp);
                     return dos;
                 case 2:
                     ImagenTres tres = new ImagenTres();
-                    circulo3.setImageDrawable(getDrawable(R.drawable.circulolleno));
-                    circulo1.setImageDrawable(getDrawable(R.drawable.ic_brightness_1_black_24dp));
-                    circulo2.setImageDrawable(getDrawable(R.drawable.ic_brightness_1_black_24dp));
 
-                   // circulo3.setImageResource(R.drawable.circulolleno);
-                    //circulo1.setImageResource(R.drawable.ic_brightness_1_black_24dp);
-                    //circulo2.setImageResource(R.drawable.ic_brightness_1_black_24dp);
                     return tres;
                 default:
                     return null;

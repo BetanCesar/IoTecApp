@@ -221,6 +221,7 @@ public class DispositivosListAdapter extends RecyclerView.Adapter<DispositivosLi
                             handler.postDelayed(new Runnable() {
                                 public void run() {
                                     Intent intent = new Intent(context, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     context.startActivity(intent);
                                 }
                             }, 1000);

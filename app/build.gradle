@@ -40,6 +40,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.github.lguipeng:BubbleView:1.0.1'
     implementation 'com.android.support:design:26.1.0'
-    implementation files('/Users/Cesar/Downloads/YouTubeAndroidPlayerApi.jar')
+    implementation files('/Users/brandon/Downloads/YouTubeAndroidPlayerApi-1.2.2/libs/YouTubeAndroidPlayerApi.jar')
 }
 apply plugin: 'com.google.gms.google-services'

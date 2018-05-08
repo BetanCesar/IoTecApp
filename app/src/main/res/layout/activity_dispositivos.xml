@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
         android:fontFamily="serif-monospace"
-        android:text="Pedir Materiales"
+        android:text="@string/pedir_materiales"
         android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="bold" />
@@ -67,7 +67,7 @@
             android:layout_below="@+id/linearLayout2"
             android:layout_marginStart="21dp"
             android:layout_marginTop="19dp"
-            android:text="Dispositivos:"
+            android:text="@string/dispositivos"
             android:textSize="18sp"
             android:textStyle="bold" />
 

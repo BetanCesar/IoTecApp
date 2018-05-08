@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IoTecApp</string>
+    <string name="rent_items">Rented items</string>
+    <string name="password">Password</string>
+    <string name="name_create">Name</string>
+    <string name="matricula_create">ID</string>
+    <string name="articulos_prestados">Borrowed items</string>
+    <string name="editar_perfil">Edit profile</string>
+    <string name="mis_prestamos">My Items</string>
+    <string name="pedir_materiales">Rent Materials</string>
+    <string name="disponibles">Available</string>
+    <string name="total">Total</string>
+    <string name="devolver_material">Return</string>
+    <string name="pedir_material">Rent</string>
+    <string name="dispositivos">Devices</string>
+    <string name="que_es_iotec">¿WHAT IS IOTECAPP?</string>
+    <string name="descripcion_quees">IoTecApp helps you to request a faster and easier way the electronic devices of the IoT center of excellence</string>
+    <string name="como_funciona">¿HOW IT WORKS?</string>
+    <string name="como_descripcion">"Very easy. all you have to do is enter the section \"Ask for meterials\" and click on the material you require. AS SIMPLE AS THAT "</string>
+    <string name="a_pedir_materiales">¡GO RENT!</string>
+</resources>

@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
+    android:layout_margin="10dp"
+    android:background="@drawable/rounded_corner"
     android:padding="15dp">
 
 
     <TextView
         android:id="@+id/nombre_text"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_toEndOf="@+id/materialPrestamoImage"
         android:padding="5dp"
         android:text="Nombre"
         android:textSize="16sp"
@@ -24,17 +24,20 @@
         android:id="@+id/btnDevolverDispositivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nombre_text"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/buttonstyle"
-        android:text="Devolver" />
+        android:text="@string/devolver_material" />
 
     <ImageView
         android:id="@+id/materialPrestamoImage"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="130dp"
+        android:layout_height="110dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />

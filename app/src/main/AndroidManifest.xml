@@ -54,7 +54,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".EditarPerfilActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".MisPrestamosActivity"></activity>
+        <activity android:name=".MisPrestamosActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

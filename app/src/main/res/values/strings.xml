@@ -3,4 +3,22 @@
     <string name="title_activity_acerca_de">AcercaDeActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="rent_items">Artículos prestados</string>
+    <string name="password">Contraseña</string>
+    <string name="name_create">Nombre</string>
+    <string name="matricula_create">Matrícula</string>
+    <string name="articulos_prestados">Artículos prestados</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="mis_prestamos">Mis Préstamos</string>
+    <string name="pedir_materiales">Pedir Materiales</string>
+    <string name="disponibles">Disponibles</string>
+    <string name="total">Total</string>
+    <string name="devolver_material">Devolver</string>
+    <string name="pedir_material">Pedir</string>
+    <string name="dispositivos">Dispositivos</string>
+    <string name="que_es_iotec">¿QUÉ ES IOTECAPP?</string>
+    <string name="descripcion_quees">IoTecApp te ayudará a solicitar de una manera más fácil y rápida los aparatos electrónicos del centro de excelencia IoT</string>
+    <string name="como_funciona">¿CÓMO FUNCIONA?</string>
+    <string name="como_descripcion">Muy fácil. lo unico que debes de hacer es ingresa a la sección “Pedir meteriales” y darle click al material que requieras. ASÍ DE SENCILLO</string>
+    <string name="a_pedir_materiales">¡A PEDIR MATERIALES!</string>
 </resources>

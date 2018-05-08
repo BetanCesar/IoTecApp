@@ -102,6 +102,11 @@ public class CreateAccountActivity extends AppCompatActivity {
                     contraseña.setError("Contraseña muy corta, minimo 6 caracteres");
                     return;
                 }
+                
+                if(!uploadImage(newmatricula)){
+                    Toast.makeText(CreateAccountActivity.this, "Debes subir tu credencial", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 //progressBar.setVisibility(View.VISIBLE)
                 auth.createUserWithEmailAndPassword(newemail,newpass)
@@ -113,6 +118,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 if(!task.isSuccessful()){
                                     Toast.makeText(CreateAccountActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                                 }else{
+                                    
                                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
                                     DatabaseReference currentUserDB = mDatabase.child(auth.getCurrentUser().getUid());
                                     currentUserDB.child("nombre").setValue(newname);
@@ -121,12 +127,11 @@ public class CreateAccountActivity extends AppCompatActivity {
 
 
                                     //CODIGO PARA SUBIR IMAGEN
-                                    uploadImage(newmatricula);
-
-
+                                   
                                     Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
+                                   
                                 }
                             }
                         });
@@ -181,7 +186,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    private void uploadImage(String newmatricula) {
+    private boolean uploadImage(String newmatricula) {
         if(filePath != null)
         {
             final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -212,6 +217,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                             progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
+            return true;
+        }else{
+
+            return false;
         }
     }
 
