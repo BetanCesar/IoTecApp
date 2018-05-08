@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
-    private ImageView perfil, facebook, acercade, materiales;
+    private ImageView perfil, facebook, acercade, materiales, youtube, chatbot;
 
 
     @Override
@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         facebook = (ImageView) findViewById(R.id.facebookbutton);
         acercade = (ImageView) findViewById(R.id.acercade);
         materiales = (ImageView) findViewById(R.id.pedir);
-
-
+        youtube = (ImageView) findViewById(R.id.youtubeimg);
+        chatbot = (ImageView) findViewById(R.id.chatbotimg);
 
         auth = FirebaseAuth.getInstance();
         //get current user
@@ -65,6 +65,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,PedirMaterialesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        chatbot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ChatbotActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,YoutubeActivity.class);
                 startActivity(intent);
             }
         });

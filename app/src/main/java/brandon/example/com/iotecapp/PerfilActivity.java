@@ -1,14 +1,18 @@
 package brandon.example.com.iotecapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -16,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class PerfilActivity extends AppCompatActivity {
 
@@ -24,17 +30,23 @@ public class PerfilActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference mRef;
     private Button logout;
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
+    private ImageView credencial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
+        credencial = (ImageView) findViewById(R.id.credencial);
         nombre = (TextView) findViewById(R.id.nombre);
         prestados = (TextView) findViewById(R.id.prestados);
         correo = (TextView) findViewById(R.id.correo);
         matricula = (TextView) findViewById(R.id.matricula);
         logout = (Button) findViewById(R.id.logoutnew);
+        firebaseStorage = FirebaseStorage.getInstance();
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +80,18 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 nombre.setText(dataSnapshot.child("nombre").getValue(String.class));
-                matricula.setText(dataSnapshot.child("matricula").getValue(String.class));
+                String matriculanueva = dataSnapshot.child("matricula").getValue(String.class);
+                matricula.setText(matriculanueva);
 
+                storageReference = firebaseStorage.getReferenceFromUrl("gs://iotecapp.appspot.com/images").child(matriculanueva);
+                final long ONE_MEGABYTE = 1024 * 1024*3;
+                storageReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        credencial.setImageBitmap(bitmap);
+                    }
+                });
 
             }
 
