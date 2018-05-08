@@ -24,6 +24,16 @@
 
     <TextView
         android:id="@+id/disponible_text"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/nombre_text"
+        android:layout_alignTop="@+id/disponible_text1"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/disponible_text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -35,9 +45,20 @@
 
     <TextView
         android:id="@+id/cantidad_text"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/disponible_text"
+        android:layout_below="@+id/disponible_text"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/materialImagePrimary"
+        app:layout_constraintTop_toBottomOf="@+id/disponible_text" />
+
+    <TextView
+        android:id="@+id/cantidad_text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/disponible_text1"
         android:layout_below="@+id/disponible_text"
         android:text="@string/total"
         app:layout_constraintEnd_toEndOf="parent"

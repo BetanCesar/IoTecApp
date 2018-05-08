@@ -76,8 +76,8 @@ public class MaterialesListAdapter extends RecyclerView.Adapter<MaterialesListAd
             }
         });
         holder.nombreText.setText(materialsList.get(position).getNombre());
-        holder.cantidadText.append(": " + materialsList.get(position).getCantidad());
-        holder.disponibleText.append(": " + materialsList.get(position).getDisponible());
+        holder.cantidadText.setText(materialsList.get(position).getCantidad());
+        holder.disponibleText.setText(materialsList.get(position).getDisponible());
 
         final String material_id = materialsList.get(position).materialId;
 
