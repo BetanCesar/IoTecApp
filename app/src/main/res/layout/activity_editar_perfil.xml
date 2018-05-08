@@ -8,18 +8,6 @@
     tools:context="brandon.example.com.iotecapp.EditarPerfilActivity">
 
 
-    <ImageView
-        android:id="@+id/image_profile"
-        android:layout_width="182dp"
-        android:layout_height="173dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/credencial" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -27,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Editar perfil"
+        android:text="@string/editar_perfil"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -39,51 +27,34 @@
         android:layout_width="282dp"
         android:layout_height="47dp"
 
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/rounded_white"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="@string/name_create"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/emailnew"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/emailnew"
         android:layout_width="282dp"
         android:layout_height="47dp"
 
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/rounded_white"
         android:ems="10"
         android:hint="Email"
         android:inputType="textWebEmailAddress"
         android:paddingLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/passwordnew"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/passwordnew"
-        android:layout_width="282dp"
-        android:layout_height="47dp"
-
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/rounded_white"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:paddingLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/matricula"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <EditText
         android:id="@+id/matricula"
@@ -92,14 +63,17 @@
 
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_white"
         android:ems="10"
-        android:hint="Matricula"
+        android:hint="@string/matricula_create"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
         app:layout_constraintBottom_toTopOf="@+id/savedata"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailnew"
+        app:layout_constraintVertical_bias="0.442" />
 
     <ImageView
         android:id="@+id/savedata"
@@ -113,31 +87,6 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/savedata" />
-
-
-    <ImageView
-        android:id="@+id/camera"
-        android:layout_width="44dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="148dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/camera" />
-
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="29dp"
-        android:layout_height="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
 
 
 </android.support.constraint.ConstraintLayout>

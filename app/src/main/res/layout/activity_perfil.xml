@@ -136,6 +136,7 @@
         android:weightSum="2">
 
         <Button
+            android:id="@+id/editar_perfil"
             android:background="@drawable/buttonstyle"
             android:textColor="#fff"
             android:layout_marginTop="20dp"

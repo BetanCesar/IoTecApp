@@ -38,7 +38,7 @@ public class PerfilActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseAuth auth;
     private DatabaseReference mRef;
-    private Button logout;
+    private Button logout, editar_perfil;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     private ImageView credencial;
@@ -58,6 +58,15 @@ public class PerfilActivity extends AppCompatActivity {
         matricula = (TextView) findViewById(R.id.matricula);
         logout = (Button) findViewById(R.id.logoutnew);
         firebaseStorage = FirebaseStorage.getInstance();
+        editar_perfil = (Button) findViewById(R.id.editar_perfil);
+
+        editar_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PerfilActivity.this,EditarPerfilActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Firestore
         mFirestore = FirebaseFirestore.getInstance();
